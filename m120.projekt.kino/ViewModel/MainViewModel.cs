@@ -25,11 +25,15 @@ namespace m120.projekt.kino.ViewModel
         public int AmountOfSeats { get; set; }
         public ObservableCollection<Film> Filmlist { get { return _cinema.Filmlist; } }
 
-        public ObservableCollection<Film> FilteredFilmlist { get; set; } // now here search always
+        private ObservableCollection<Film> filteredFilmlist;
+        public ObservableCollection<Film> FilteredFilmlist { get { return filteredFilmlist; } set {
+                filteredFilmlist = value;
+                RaisePropertyChanged(nameof(FilteredFilmlist));
+            } }
         public Film SelectedFilm { get; set; }
-        //static private Cinema _instance;
-
+        public string Searchquery { get; set; }
         public RelayCommand SeeDetailsCommand { get; private set; }
+        public RelayCommand SearchCommand { get; private set; }
 
         public MainViewModel()
         {
@@ -37,8 +41,8 @@ namespace m120.projekt.kino.ViewModel
             _cinema = cinema;
 
             SeeDetailsCommand = new RelayCommand(SeeFilmDetails);
-
-
+            SearchCommand = new RelayCommand(FindFilmByName);
+            FilteredFilmlist = Filmlist;
         }
 
       
@@ -46,17 +50,32 @@ namespace m120.projekt.kino.ViewModel
 
         public void SeeFilmDetails(object o)
         {
-
-            //if (Contacts == null)
-            // {
-            //     Contacts = new ObservableCollection<ObservableContact>();
-            // }
             PurchaseViewModel purchaseViewModel = new PurchaseViewModel();
             purchaseViewModel.Title = SelectedFilm.Title;
+            purchaseViewModel.Category = SelectedFilm.Category;
+            purchaseViewModel.Duration = SelectedFilm.Duration;
+            purchaseViewModel.Shows = SelectedFilm.Shows;
            
             PurchaseWindow win = new PurchaseWindow(purchaseViewModel);
             win.Show();
         }
+
+        public void FindFilmByName(object o)
+        {
+            IEnumerable<Film> FilteredFilm = Filmlist
+                .Where(r => Searchquery == null || r.Title.Contains(Searchquery))
+                .ToList();
+            //FilteredFilmlist = (ObservableCollection<Film>)FilteredFilm;
+            FilteredFilmlist = new ObservableCollection<Film>();
+            foreach (Film film in FilteredFilm)
+            {
+                FilteredFilmlist.Add(film);
+            }
+        }
+
+        //Get all times in Film class? How to list all times of the shows
+        // Loop through the shows of a film, add the thingies and keep the property ig?
+        
 
 
     }

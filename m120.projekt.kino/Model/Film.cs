@@ -9,6 +9,15 @@ namespace m120.projekt.kino.Model
 {
     class Film
     {
+        public Film() { }
+        public Film(int filmId, string title, Category category, int duration, ObservableCollection<Show> shows)
+        {
+            FilmId = filmId;
+            Title = title;
+            Category = category;
+            Duration = duration;
+            Shows = shows;
+        }
         public int FilmId { get; set; }
         public string Title { get; set; }
         public Category Category { get; set; }

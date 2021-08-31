@@ -10,6 +10,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -17,6 +19,27 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding Title}"></TextBlock>
+        
+        <!--Labels-->
+        <Label Grid.Row="0" Grid.Column="0" Content="Title:"></Label>
+        <Label Grid.Row="1" Grid.Column="0" Content="Category:"></Label>
+        <Label Grid.Row="2" Grid.Column="0" Content="Duration:"></Label>
+        <Label Grid.Row="3" Grid.Column="0" Content="Time:"></Label>
+        <Label Grid.Row="0" Grid.Column="2" Content="Amount available tickets:"></Label>
+        <Label Grid.Row="1" Grid.Column="2" Content="Tickets:"></Label>
+        <Label Grid.Row="2" Grid.Column="2" Content="Total Price:"></Label>
+        
+        
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Title}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Category.Description}"></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Duration}"></TextBlock>
+        <ComboBox Grid.Row="3" Grid.Column="1" Name="comboTimes" ItemsSource="{Binding Shows}" DisplayMemberPath="Time" SelectedIndex="0" SelectedItem="{Binding SelectedShow}" />
+
+        <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding ElementName=comboTimes, Path=SelectedItem.AmountFreeSeats}"></TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding AmountTickets}"></TextBox>
+      
+
+        <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding TotalPrice}"></TextBlock>
+        <Button Grid.Row="3" Grid.Column="3" Content="Book" Command="{Binding BookTicketsCommand}"></Button>
     </Grid>
 </Window>

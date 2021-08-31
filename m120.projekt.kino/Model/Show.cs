@@ -8,7 +8,12 @@ namespace m120.projekt.kino.Model
 {
     public class Show
     {
-        // Price????
+        public Show() { }
+        public Show(string time, int amountFreeSeats)
+        {
+            Time = time;
+            AmountFreeSeats = amountFreeSeats;
+        }
         public string Time { get; set; }
         public int AmountFreeSeats { get; set; }
     }
