@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace m120.projekt.kino.Model
 {
-    class Category
+    public class Category
     {
-        public int Id { get; set; }
+        public int CategoryId { get; set; }
         public string Description { get; set; }
     }
 }

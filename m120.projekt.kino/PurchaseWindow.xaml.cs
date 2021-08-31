@@ -1,4 +1,5 @@
-﻿using System;
+﻿using m120.projekt.kino.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,9 @@ namespace m120.projekt.kino
     /// </summary>
     public partial class PurchaseWindow : Window
     {
-        public PurchaseWindow()
+        public PurchaseWindow(PurchaseViewModel purchaseViewModel)
         {
+            DataContext = purchaseViewModel;
             InitializeComponent();
         }
     }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using m120.projekt.kino.Model;
+using m120.projekt.kino.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,8 @@ namespace m120.projekt.kino
     {
         public MainWindow()
         {
+            MainViewModel mainViewModel = new MainViewModel();
+            DataContext = mainViewModel;
             InitializeComponent();
         }
     }

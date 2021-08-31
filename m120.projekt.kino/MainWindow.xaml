@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:m120.projekt.kino"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Overview" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+        <TextBox Grid.Row="0"></TextBox>
+        <Button>Search</Button>
+        </StackPanel>
+        <Button Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Command="{Binding SeeDetailsCommand}">See Film Details</Button>
+        <DataGrid Grid.Row="1"  Grid.ColumnSpan="2" Name= "dataGrid" AutoGenerateColumns = "False" ItemsSource="{Binding Filmlist}" SelectedItem="{Binding SelectedFilm}">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header = "Title" Binding = "{Binding Title}" />
+                <DataGridTextColumn Header = "Category" Binding = "{Binding Category.Description}" />
+                <DataGridTextColumn Header = "Duration" Binding = "{Binding Duration}"/>
+                <DataGridTextColumn Header = "Times of Shows" Binding = "{Binding Times}" />
+
+            </DataGrid.Columns>
+
+        </DataGrid>
     </Grid>
 </Window>

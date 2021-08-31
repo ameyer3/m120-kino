@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace m120.projekt.kino.Model
 {
-    class Show
+    public class Show
     {
+        // Price????
         public string Time { get; set; }
-        private int amountFreeSeats;
+        public int AmountFreeSeats { get; set; }
     }
 }
