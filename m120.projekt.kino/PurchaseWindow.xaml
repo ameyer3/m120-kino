@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:m120.projekt.kino"
         mc:Ignorable="d"
-        Title="PurchaseWindow" Height="250" Width="800">
+        Title="Purchase Tickets" Height="250" Width="800">
     
     <Grid>
         
