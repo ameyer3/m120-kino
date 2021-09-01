@@ -18,11 +18,11 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-        <TextBox Text="{Binding Searchquery}" Grid.Row="0"></TextBox>
+            <TextBox Text="{Binding Searchquery, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0"></TextBox>
         <Button Command="{Binding SearchCommand}">Search</Button>
         </StackPanel>
         <Button Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Command="{Binding SeeDetailsCommand}">See Film Details</Button>
-        <DataGrid Grid.Row="1"  Grid.ColumnSpan="2" Name= "dataGrid" AutoGenerateColumns = "False" ItemsSource="{Binding FilteredFilmlist}" SelectedItem="{Binding SelectedFilm}">
+        <DataGrid Grid.Row="1"  Grid.ColumnSpan="2" Name= "dataGrid" AutoGenerateColumns = "False" ItemsSource="{Binding FilteredFilmlist, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedFilm}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header = "Title" Binding = "{Binding Title}" />

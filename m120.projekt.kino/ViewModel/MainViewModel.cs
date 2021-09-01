@@ -32,6 +32,8 @@ namespace m120.projekt.kino.ViewModel
             } }
         public Film SelectedFilm { get; set; }
         public string Searchquery { get; set; }
+
+
         public RelayCommand SeeDetailsCommand { get; private set; }
         public RelayCommand SearchCommand { get; private set; }
 
@@ -43,9 +45,11 @@ namespace m120.projekt.kino.ViewModel
             SeeDetailsCommand = new RelayCommand(SeeFilmDetails);
             SearchCommand = new RelayCommand(FindFilmByName);
             FilteredFilmlist = Filmlist;
+
+
         }
 
-      
+
 
 
         public void SeeFilmDetails(object o)
@@ -65,18 +69,11 @@ namespace m120.projekt.kino.ViewModel
             IEnumerable<Film> FilteredFilm = Filmlist
                 .Where(r => Searchquery == null || r.Title.Contains(Searchquery))
                 .ToList();
-            //FilteredFilmlist = (ObservableCollection<Film>)FilteredFilm;
             FilteredFilmlist = new ObservableCollection<Film>();
             foreach (Film film in FilteredFilm)
             {
                 FilteredFilmlist.Add(film);
             }
         }
-
-        //Get all times in Film class? How to list all times of the shows
-        // Loop through the shows of a film, add the thingies and keep the property ig?
-        
-
-
     }
 }
