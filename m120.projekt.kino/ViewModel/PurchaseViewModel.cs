@@ -33,24 +33,33 @@ namespace m120.projekt.kino.ViewModel
         public Category Category { get; set; }
         public int Duration { get; set; }
         public ObservableCollection<Show> Shows { get; set; }
-        
-        public Show SelectedShow{get;set;}
+
+
+        public Show SelectedShow { get; set; }
         private int amountTickets;
-        public int AmountTickets { get { return amountTickets; } set {
+        public int AmountTickets
+        {
+            get { return amountTickets; }
+            set
+            {
                 if (value <= 0)
                 {
                     throw new ArgumentException("Book at least one ticket.");
                 }
                 else
-                { 
-                amountTickets = value;
-                RaisePropertyChanged(nameof(AmountTickets));
-                TotalPrice = amountTickets * 12;
+                {
+                    amountTickets = value;
+                    RaisePropertyChanged(nameof(AmountTickets));
+                    TotalPrice = amountTickets * 12;
                 }
             }
         }
         private int totalPrice;
-        public int TotalPrice { get { return totalPrice; } set {
+        public int TotalPrice
+        {
+            get { return totalPrice; }
+            set
+            {
                 totalPrice = value;
                 RaisePropertyChanged(nameof(TotalPrice));
             }
@@ -58,23 +67,32 @@ namespace m120.projekt.kino.ViewModel
         public void BookTickets(object o)
         {
 
-            if (AmountTickets <= 0)
+            if (AmountTickets <= 0 || SelectedShow == null)
             {
-                MessageBox.Show("Book at least one ticket.");
+                MessageBox.Show("Book at least one ticket and choose a show.");
             }
+           
             else
             {
                 SelectedShow.AmountFreeSeats -= AmountTickets;
-                MessageBox.Show(SelectedShow.Time, AmountTickets.ToString() + SelectedShow.AmountFreeSeats.ToString());
-                var window = Application.Current.Windows.OfType<Window>()
-                    .SingleOrDefault(x => x.IsActive);
-                window.Hide();
-              
-                     
+                if (SelectedShow.AmountFreeSeats < 0)
+                {
+                    MessageBox.Show("This Show is booked out, buy less tickets or choose another time please.");
+                }
+                else
+                {
+                    MessageBox.Show(SelectedShow.Time, AmountTickets.ToString() + SelectedShow.AmountFreeSeats.ToString());
+                    var window = Application.Current.Windows.OfType<Window>()
+                        .SingleOrDefault(x => x.IsActive);
+                    window.Hide();
+                }
+               
+
+
             }
 
         }
-        
+
 
     }
 }
