@@ -38,7 +38,7 @@
         <ComboBox VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Name="comboTimes" ItemsSource="{Binding Shows}" DisplayMemberPath="Time" SelectedIndex="0" SelectedItem="{Binding SelectedShow}" />
 
         <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="3" Text="{Binding ElementName=comboTimes, Path=SelectedItem.AmountFreeSeats}"></TextBlock>
-        <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding AmountTickets, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding Path=AmountTickets, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"></TextBox>
 
 
         <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" Text="{Binding TotalPrice, UpdateSourceTrigger=PropertyChanged}"></TextBlock>

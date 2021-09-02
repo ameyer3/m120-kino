@@ -37,10 +37,16 @@ namespace m120.projekt.kino.ViewModel
         public Show SelectedShow{get;set;}
         private int amountTickets;
         public int AmountTickets { get { return amountTickets; } set {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("Book at least one ticket.");
+                }
+                else
+                { 
                 amountTickets = value;
                 RaisePropertyChanged(nameof(AmountTickets));
                 TotalPrice = amountTickets * 12;
-                
+                }
             }
         }
         private int totalPrice;
@@ -51,17 +57,20 @@ namespace m120.projekt.kino.ViewModel
         }
         public void BookTickets(object o)
         {
-            if (AmountTickets == 0)
+
+            if (AmountTickets <= 0)
             {
-                //or also use datavalidation
-                MessageBox.Show("Please choose the amount of Tickets");
+                MessageBox.Show("Book at least one ticket.");
             }
             else
             {
                 SelectedShow.AmountFreeSeats -= AmountTickets;
                 MessageBox.Show(SelectedShow.Time, AmountTickets.ToString() + SelectedShow.AmountFreeSeats.ToString());
-                var w = Application.Current.Windows[2];
-                w.Hide();
+                var window = Application.Current.Windows.OfType<Window>()
+                    .SingleOrDefault(x => x.IsActive);
+                window.Hide();
+              
+                     
             }
 
         }
