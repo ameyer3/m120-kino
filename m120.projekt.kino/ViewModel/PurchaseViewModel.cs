@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,11 +80,21 @@ namespace m120.projekt.kino.ViewModel
                 SelectedShow.AmountFreeSeats -= AmountTickets;
                 if (SelectedShow.AmountFreeSeats < 0)
                 {
+                    SelectedShow.AmountFreeSeats += AmountTickets;
                     MessageBox.Show("This Show is booked out, buy less tickets or choose another time please.");
                 }
                 else
                 {
-                    MessageBox.Show(SelectedShow.Time, AmountTickets.ToString() + SelectedShow.AmountFreeSeats.ToString());
+                    MessageBoxResult dialogResult = MessageBox.Show(
+                        "Your reservation has been saved to our system. Would you like to download a receipt?", 
+                        "Booking successful!",
+                        MessageBoxButton.YesNo);
+                    if (dialogResult == MessageBoxResult.Yes)
+                    {
+                        CreateReceipt(SelectedShow.Time, AmountTickets);
+                    }
+                    
+
                     var window = Application.Current.Windows.OfType<Window>()
                         .SingleOrDefault(x => x.IsActive);
                     window.Close();
@@ -92,8 +103,20 @@ namespace m120.projekt.kino.ViewModel
 
 
             }
+           
 
+        } 
+        public void CreateReceipt(string time, int tickets)
+        {
+            string textFileName = "m120.receipt.cinema.txt";
+            StreamWriter sw = new StreamWriter(textFileName);
+            sw.WriteLine($"Thanks for choosing our cinema. Your purchase for the movie {Title} has been processed and saved to our system.");
+            sw.WriteLine($"You can pick up you {tickets} Tickets at the entry of our cinema. Your total of {TotalPrice} will be removed from your credit card in the following days.");
+            sw.WriteLine($"Your show starts at {time}. See you then!");
+            sw.Close();
+            MessageBox.Show("Receipt was saved to your current directory.");
         }
+
         public void CloseWindow(object o)
         {
             var window = Application.Current.Windows.OfType<Window>()
