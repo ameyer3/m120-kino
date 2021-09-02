@@ -22,10 +22,12 @@ namespace m120.projekt.kino.ViewModel
             }
         }
 
-        public RelayCommand BookTicketsCommand { get; private set; }
+        public RelayCommand BookTicketsCommand { get; }
+        public RelayCommand CancelCommand { get; }
         public PurchaseViewModel()
         {
             BookTicketsCommand = new RelayCommand(BookTickets);
+            CancelCommand = new RelayCommand(CloseWindow);
         }
 
         public int FilmId { get; set; }
@@ -84,13 +86,19 @@ namespace m120.projekt.kino.ViewModel
                     MessageBox.Show(SelectedShow.Time, AmountTickets.ToString() + SelectedShow.AmountFreeSeats.ToString());
                     var window = Application.Current.Windows.OfType<Window>()
                         .SingleOrDefault(x => x.IsActive);
-                    window.Hide();
+                    window.Close();
                 }
                
 
 
             }
 
+        }
+        public void CloseWindow(object o)
+        {
+            var window = Application.Current.Windows.OfType<Window>()
+                        .SingleOrDefault(x => x.IsActive);
+            window.Close();
         }
 
 

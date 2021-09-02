@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:m120.projekt.kino"
         mc:Ignorable="d"
-        Title="Purchase Tickets" Height="250" Width="800">
+        Title="Purchase Tickets" Height="310" Width="800">
     
     <Grid>
         
@@ -16,29 +16,36 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        
-        <!--Labels-->
-        <Label VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="Title:"></Label>
-        <Label VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Category:"></Label>
-        <Label VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Content="Duration:"></Label>
-        <Label VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Content="Time:"></Label>
-        <Label VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Content="Amount available tickets:"></Label>
-        <Label VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Content="Tickets:"></Label>
-        <Label VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Content="Total Price:"></Label>
-        
-        
-        <TextBlock VerticalAlignment="Center"   Grid.Row="0" Grid.Column="1" Text="{Binding Title}"></TextBlock>
-        <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding Category.Description}"></TextBlock>
-        <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Duration}"></TextBlock>
-        <ComboBox VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Name="comboTimes" ItemsSource="{Binding Shows}" DisplayMemberPath="Time" SelectedItem="{Binding SelectedShow}" SelectedIndex="0"  />
+            <RowDefinition Height="1.4*"></RowDefinition>
 
-        <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="3" Text="{Binding ElementName=comboTimes, Path=SelectedItem.AmountFreeSeats}"></TextBlock>
-        <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding Path=AmountTickets, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True}">
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="5" Grid.ColumnSpan="4">
+            <TextBlock Text="Ticketpurchase" FontSize="20"></TextBlock>
+            <TextBlock Text="Choose the time of the show you would like to attend and enter the amount of tickets to purchase."></TextBlock>
+            <TextBlock Text="Click book to complete your purchase."></TextBlock>
+        </StackPanel>
+        <!--Labels-->
+        <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Title:"></Label>
+        <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Content="Category:"></Label>
+        <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Content="Duration:"></Label>
+        <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" Content="Time:"></Label>
+        <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Content="Amount available tickets:"></Label>
+        <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Content="Tickets:"></Label>
+        <Label FontWeight="Bold" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Content="Total Price:"></Label>
+
+
+        <TextBlock Margin="5" VerticalAlignment="Center"   Grid.Row="1" Grid.Column="1" Text="{Binding Title}"></TextBlock>
+        <TextBlock Margin="5" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Category.Description}"></TextBlock>
+        <TextBlock Margin="5" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Text="{Binding Duration}"></TextBlock>
+        <ComboBox Margin="5" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" Name="comboTimes" ItemsSource="{Binding Shows}" DisplayMemberPath="Time" SelectedItem="{Binding SelectedShow}" SelectedIndex="0"  />
+
+        <TextBlock Margin="5" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding ElementName=comboTimes, Path=SelectedItem.AmountFreeSeats}"></TextBlock>
+        <TextBox Margin="5" VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" Text="{Binding Path=AmountTickets, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True}">
             <Validation.ErrorTemplate>
                 <ControlTemplate>
                     <StackPanel>
@@ -51,7 +58,13 @@
         </TextBox>
 
 
-        <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" Text="{Binding TotalPrice, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-        <Button VerticalAlignment="Center" Grid.Row="3" Grid.Column="3" Content="Book" Command="{Binding BookTicketsCommand}"></Button>
+
+        <TextBlock Margin="5" VerticalAlignment="Center" Grid.Row="3" Grid.Column="3" Text="{Binding TotalPrice, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+
+        <StackPanel Margin="4" Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" >
+            <Button Margin ="1" Content="Book" Command="{Binding BookTicketsCommand}"></Button>
+            <Button Margin="1" Content="Cancel" Command="{Binding CancelCommand}"></Button>
+        </StackPanel>
+        
     </Grid>
 </Window>

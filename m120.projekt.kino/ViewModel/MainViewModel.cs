@@ -34,8 +34,9 @@ namespace m120.projekt.kino.ViewModel
         public string Searchquery { get; set; }
 
 
-        public RelayCommand SeeDetailsCommand { get; private set; }
-        public RelayCommand SearchCommand { get; private set; }
+        public RelayCommand SeeDetailsCommand { get; }
+        public RelayCommand SearchCommand { get; }
+        public RelayCommand SeeAllFilmsCommand { get; }
 
         public MainViewModel()
         {
@@ -44,6 +45,7 @@ namespace m120.projekt.kino.ViewModel
 
             SeeDetailsCommand = new RelayCommand(SeeFilmDetails);
             SearchCommand = new RelayCommand(FindFilmByName);
+            SeeAllFilmsCommand = new RelayCommand(SeeAllFilms);
             FilteredFilmlist = Filmlist;
 
 
@@ -74,6 +76,11 @@ namespace m120.projekt.kino.ViewModel
             {
                 FilteredFilmlist.Add(film);
             }
+        }
+
+        public void SeeAllFilms(object o)
+        {
+            FilteredFilmlist = Filmlist;
         }
     }
 }

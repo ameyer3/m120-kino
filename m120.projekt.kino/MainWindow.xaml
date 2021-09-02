@@ -16,15 +16,19 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-
-        <StackPanel Orientation="Horizontal" Height="20">
-            <TextBox Width="375" Text="{Binding Searchquery, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0"></TextBox>
-            <Button  Command="{Binding SearchCommand}">
+        <StackPanel VerticalAlignment="Top" Margin="5">
+            <TextBlock Text="{Binding Name}" FontSize="25"></TextBlock>
+            <TextBlock Text="Book your tickets now!" FontSize="18"></TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Bottom" >
+            <TextBox Margin="5" Width="250" Text="{Binding Searchquery, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Button Height="20" Command="{Binding SearchCommand}">
                 <Image Source="Assets/search_icon.png" Height="15"/>
             </Button>
+            <Button Margin="5" Command="{Binding SeeAllFilmsCommand}" Content="See all films"></Button>
         </StackPanel>
-        <Button Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Command="{Binding SeeDetailsCommand}">See Film Details</Button>
-        <DataGrid Grid.Row="1"  Grid.ColumnSpan="2" Name= "dataGrid" AutoGenerateColumns = "False" ItemsSource="{Binding FilteredFilmlist, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedFilm}">
+        <Button Margin="5" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Command="{Binding SeeDetailsCommand}">See Film Details</Button>
+        <DataGrid Margin="5" Grid.Row="1"  Grid.ColumnSpan="2" Name= "dataGrid" AutoGenerateColumns = "False" ItemsSource="{Binding FilteredFilmlist, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedFilm}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Width="300" Header = "Title" Binding = "{Binding Title}" />
