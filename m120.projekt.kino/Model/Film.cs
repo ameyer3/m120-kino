@@ -28,7 +28,7 @@ namespace m120.projekt.kino.Model
         
         public string GetTimes()
         {
-            string times = "\n";
+            string times = "";
             foreach (Show show in Shows)
             {
                 times += show.Time + "\n";

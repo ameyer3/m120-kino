@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:m120.projekt.kino"
         mc:Ignorable="d"
-        Title="Overview" Height="450" Width="800">
+        Title="Overview" Height="400" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -18,8 +18,11 @@
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Top" Margin="5">
             <TextBlock Text="{Binding Name}" FontSize="25"></TextBlock>
-            <TextBlock Text="Book your tickets now!" FontSize="18"></TextBlock>
+            <TextBlock Text="Quick and Easy! Book your tickets online." FontSize="18"></TextBlock>
+            <TextBlock Text="Select your favorite film and book your tickets." FontSize="15"></TextBlock>
+
         </StackPanel>
+        
         <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Bottom" >
             <TextBox Margin="5" Width="250" Text="{Binding Searchquery, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Button Height="20" Command="{Binding SearchCommand}">
@@ -31,10 +34,10 @@
         <DataGrid Margin="5" Grid.Row="1"  Grid.ColumnSpan="2" Name= "dataGrid" AutoGenerateColumns = "False" ItemsSource="{Binding FilteredFilmlist, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedFilm}">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Width="300" Header = "Title" Binding = "{Binding Title}" />
-                <DataGridTextColumn Width="200" Header = "Category" Binding = "{Binding Category.Description}" />
-                <DataGridTextColumn Width="80" Header = "Duration" Binding = "{Binding Duration}"/>
-                <DataGridTextColumn Width="100" Header = "Times of Shows" Binding = "{Binding Times}" />
+                <DataGridTextColumn Width="320" Header = "Title" Binding = "{Binding Title}" />
+                <DataGridTextColumn Width="220" Header = "Category" Binding = "{Binding Category.Description}" />
+                <DataGridTextColumn Width="110" Header = "Duration" Binding = "{Binding Duration}"/>
+                <DataGridTextColumn Width="117" Header = "Times of Shows" Binding = "{Binding Times}" />
 
             </DataGrid.Columns>
 
