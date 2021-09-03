@@ -59,6 +59,7 @@
     <Compile Include="PurchaseWindow.xaml.cs">
       <DependentUpon>PurchaseWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\TicketConverter.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PurchaseViewModel.cs" />
     <Page Include="MainWindow.xaml">

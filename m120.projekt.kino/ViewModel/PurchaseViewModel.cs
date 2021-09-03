@@ -47,14 +47,19 @@ namespace m120.projekt.kino.ViewModel
             {
                 if (value <= 0)
                 {
+                    amountTickets = 0;
+                    TotalPrice = amountTickets * 12;
                     throw new ArgumentException("Book at least one ticket.");
                 }
                 else
                 {
-                    amountTickets = value;
+                        amountTickets = value;
+                    
+                   
                     RaisePropertyChanged(nameof(AmountTickets));
                     TotalPrice = amountTickets * 12;
                 }
+                
             }
         }
         private int totalPrice;
@@ -63,7 +68,12 @@ namespace m120.projekt.kino.ViewModel
             get { return totalPrice; }
             set
             {
-                totalPrice = value;
+               
+                    totalPrice = 0;
+               
+                    totalPrice = value;
+
+                
                 RaisePropertyChanged(nameof(TotalPrice));
             }
         }
@@ -111,7 +121,7 @@ namespace m120.projekt.kino.ViewModel
             string textFileName = "m120.receipt.cinema.txt";
             StreamWriter sw = new StreamWriter(textFileName);
             sw.WriteLine($"Thanks for choosing our cinema. Your purchase for the movie {Title} has been processed and saved to our system.");
-            sw.WriteLine($"You can pick up you {tickets} Tickets at the entry of our cinema. Your total of {TotalPrice} will be removed from your credit card in the following days.");
+            sw.WriteLine($"You can pick up your {tickets} Tickets at the entry of our cinema. Your total of {TotalPrice}.- will be removed from your credit card in the following days.");
             sw.WriteLine($"Your show starts at {time}. See you then!");
             sw.Close();
             MessageBox.Show("Receipt was saved to your current directory.");

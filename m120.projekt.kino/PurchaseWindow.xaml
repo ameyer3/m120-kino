@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:m120.projekt.kino"
         mc:Ignorable="d"
         Title="Purchase Tickets" Height="310" Width="620">
-    
+    <Window.Resources>
+        <local:TicketConverter x:Key="TicketConverter" />
+    </Window.Resources>
     <Grid>
         
         <Grid.ColumnDefinitions>
@@ -46,7 +48,7 @@
         <ComboBox Margin="5" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Name="comboTimes" ItemsSource="{Binding Shows}" DisplayMemberPath="Time" SelectedItem="{Binding SelectedShow}" SelectedIndex="0"  />
 
         <TextBlock Margin="5" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" Text="{Binding ElementName=comboTimes, Path=SelectedItem.AmountFreeSeats}"></TextBlock>
-        <TextBox Margin="5" VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" Text="{Binding Path=AmountTickets, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True}">
+        <TextBox Margin="5" VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" Text="{Binding Path=AmountTickets, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, Converter={StaticResource TicketConverter}}">
             <Validation.ErrorTemplate>
                 <ControlTemplate>
                     <StackPanel>
