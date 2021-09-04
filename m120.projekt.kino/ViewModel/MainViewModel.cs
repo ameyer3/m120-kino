@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace m120.projekt.kino.ViewModel
 {
@@ -56,14 +57,22 @@ namespace m120.projekt.kino.ViewModel
 
         public void SeeFilmDetails(object o)
         {
-            PurchaseViewModel purchaseViewModel = new PurchaseViewModel();
-            purchaseViewModel.Title = SelectedFilm.Title;
-            purchaseViewModel.Category = SelectedFilm.Category;
-            purchaseViewModel.Duration = SelectedFilm.Duration;
-            purchaseViewModel.Shows = SelectedFilm.Shows;
-           
-            PurchaseWindow win = new PurchaseWindow(purchaseViewModel);
-            win.Show();
+            if (SelectedFilm != null)
+            {
+                PurchaseViewModel purchaseViewModel = new PurchaseViewModel();
+                purchaseViewModel.Title = SelectedFilm.Title;
+                purchaseViewModel.Category = SelectedFilm.Category;
+                purchaseViewModel.Duration = SelectedFilm.Duration;
+                purchaseViewModel.Shows = SelectedFilm.Shows;
+
+                PurchaseWindow win = new PurchaseWindow(purchaseViewModel);
+                win.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select a movie.");
+            }
+            
         }
 
         public void FindFilmByName(object o)

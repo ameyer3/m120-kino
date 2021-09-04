@@ -21,7 +21,7 @@ namespace m120.projekt.kino.Model
             {
                 _instance = new Cinema();
             }
-            _instance.Name = "Kino Museum";
+            _instance.Name = "Kino ABC";
             _instance.AmountOfSeats = 30;
             _instance.Filmlist = CreateFilmlist();
             return _instance;
