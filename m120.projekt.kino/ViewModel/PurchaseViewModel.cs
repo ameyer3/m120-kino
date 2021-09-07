@@ -48,7 +48,7 @@ namespace m120.projekt.kino.ViewModel
                 if (value <= 0)
                 {
                     amountTickets = 0;
-                    TotalPrice = amountTickets * 12;
+                    TotalPrice = amountTickets * SelectedShow.Price;
                     throw new ArgumentException("Book at least one ticket.");
                 }
                 else
@@ -57,7 +57,7 @@ namespace m120.projekt.kino.ViewModel
                     
                    
                     RaisePropertyChanged(nameof(AmountTickets));
-                    TotalPrice = amountTickets * 12;
+                    TotalPrice = amountTickets * SelectedShow.Price;
                 }
                 
             }

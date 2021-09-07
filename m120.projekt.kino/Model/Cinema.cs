@@ -22,7 +22,7 @@ namespace m120.projekt.kino.Model
                 _instance = new Cinema();
             }
             _instance.Name = "Kino ABC";
-            _instance.AmountOfSeats = 30;
+            _instance.AmountOfSeats = 85;
             _instance.Filmlist = CreateFilmlist();
             return _instance;
         }
@@ -39,12 +39,17 @@ namespace m120.projekt.kino.Model
             Category category3 = new Category(2, "Comedy");
             Category category2 = new Category(3, "Romance");
 
-            Show show1 = new Show("20:00", 50);
-            Show show2 = new Show("12:00", 20);
-            Show show3 = new Show("13:25", 15);
+            Show show1 = new Show("20:00", 50, 12);
+            Show show2 = new Show("12:00", 20, 12);
+            Show show3 = new Show("14:25", 15, 12);
+            Show show4 = new Show("13:25", 15, 10);
+            Show show5 = new Show("12:25", 20, 10);
+            Show show6 = new Show("10:25", 50, 5);
+            Show show7 = new Show("13:25", 20, 5);
+
             ObservableCollection<Show> showlist1 = new ObservableCollection<Show> { show1, show2, show3 };
-            ObservableCollection<Show> showlist2 = new ObservableCollection<Show> { show2, show3 };
-            ObservableCollection<Show> showlist3 = new ObservableCollection<Show> { show1, show2 };
+            ObservableCollection<Show> showlist2 = new ObservableCollection<Show> { show4, show5 };
+            ObservableCollection<Show> showlist3 = new ObservableCollection<Show> { show6, show7 };
 
             Film film1 = new Film(1, "Film1", category1, 90, showlist1);
             Film film2 = new Film(2, "Film2", category2, 180, showlist2);
