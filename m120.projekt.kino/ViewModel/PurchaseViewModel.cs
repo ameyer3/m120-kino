@@ -37,8 +37,8 @@ namespace m120.projekt.kino.ViewModel
         public int Duration { get; set; }
         public ObservableCollection<Show> Shows { get; set; }
 
-
-        public Show SelectedShow { get; set; }
+  
+        public Show SelectedShow { get; set;  }
         private int amountTickets;
         public int AmountTickets
         {
@@ -48,14 +48,18 @@ namespace m120.projekt.kino.ViewModel
                 if (value <= 0)
                 {
                     amountTickets = 0;
-                    TotalPrice = amountTickets * SelectedShow.Price;
+                    TotalPrice = 0;
                     throw new ArgumentException("Book at least one ticket.");
+                }
+                else if (SelectedShow == null)
+                {
+                    amountTickets = 0;
+                    TotalPrice = 0;
+                    throw new ArgumentException("Choose a show first.");   
                 }
                 else
                 {
-                        amountTickets = value;
-                    
-                   
+                    amountTickets = value;
                     RaisePropertyChanged(nameof(AmountTickets));
                     TotalPrice = amountTickets * SelectedShow.Price;
                 }

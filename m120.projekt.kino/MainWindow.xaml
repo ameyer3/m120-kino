@@ -31,7 +31,7 @@
             <Button Margin="5" Command="{Binding SeeAllFilmsCommand}" Content="See all films"></Button>
         </StackPanel>
         <Button Margin="5" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Command="{Binding SeeDetailsCommand}">See Film Details</Button>
-        <DataGrid Margin="5" Grid.Row="1"  Grid.ColumnSpan="2" Name= "dataGrid" AutoGenerateColumns = "False" ItemsSource="{Binding FilteredFilmlist, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedFilm}">
+        <DataGrid Margin="5" Grid.Row="1"  Grid.ColumnSpan="2" Name= "dataGrid" AutoGenerateColumns = "False" CanUserAddRows="False" ItemsSource="{Binding FilteredFilmlist, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedFilm}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Width="320" Header = "Title" Binding = "{Binding Title}" />

@@ -21,10 +21,10 @@ namespace m120.projekt.kino.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        private Cinema _cinema;
-        public string Name { get { return _cinema.Name; } } 
+        private Cinema cinema;
+        public string Name { get { return cinema.Name; } } 
         public int AmountOfSeats { get; set; }
-        public ObservableCollection<Film> Filmlist { get { return _cinema.Filmlist; } }
+        public ObservableCollection<Film> Filmlist { get { return cinema.Filmlist; } }
 
         private ObservableCollection<Film> filteredFilmlist;
         public ObservableCollection<Film> FilteredFilmlist { get { return filteredFilmlist; } set {
@@ -41,8 +41,8 @@ namespace m120.projekt.kino.ViewModel
 
         public MainViewModel()
         {
-            Cinema cinema = Cinema.getInstance();
-            _cinema = cinema;
+            Cinema cinemaInstance = Cinema.getInstance();
+            cinema = cinemaInstance;
 
             SeeDetailsCommand = new RelayCommand(SeeFilmDetails);
             SearchCommand = new RelayCommand(FindFilmByName);

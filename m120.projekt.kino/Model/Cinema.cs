@@ -12,19 +12,19 @@ namespace m120.projekt.kino.Model
         public string Name { get; set; }
         public int AmountOfSeats { get; set; }
         public ObservableCollection<Film> Filmlist { get; set; } 
-        static private Cinema _instance;
+        static private Cinema instance;
 
 
         static public Cinema getInstance()
         {
-            if (_instance == null)
+            if (instance == null)
             {
-                _instance = new Cinema();
+                instance = new Cinema();
             }
-            _instance.Name = "Kino ABC";
-            _instance.AmountOfSeats = 85;
-            _instance.Filmlist = CreateFilmlist();
-            return _instance;
+            instance.Name = "Kino ABC";
+            instance.AmountOfSeats = 85;
+            instance.Filmlist = CreateFilmlist();
+            return instance;
         }
         public Film FindFilmByName()
         {
@@ -53,7 +53,7 @@ namespace m120.projekt.kino.Model
 
             Film film1 = new Film(1, "Film1", category1, 90, showlist1);
             Film film2 = new Film(2, "Film2", category2, 180, showlist2);
-            Film film3 = new Film(3, "Film3", category1, 200, showlist3);
+            Film film3 = new Film(3, "Film3", category3, 200, showlist3);
             ObservableCollection<Film> filmlist = new ObservableCollection<Film>{film1, film2, film3};
             return filmlist;
         }
