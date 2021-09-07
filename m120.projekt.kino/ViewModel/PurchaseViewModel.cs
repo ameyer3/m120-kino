@@ -31,7 +31,6 @@ namespace m120.projekt.kino.ViewModel
             CancelCommand = new RelayCommand(CloseWindow);
         }
 
-        public int FilmId { get; set; }
         public string Title { get; set; }
         public Category Category { get; set; }
         public int Duration { get; set; }
@@ -45,6 +44,8 @@ namespace m120.projekt.kino.ViewModel
             get { return amountTickets; }
             set
             {
+                amountTickets = value;
+                RaisePropertyChanged(nameof(AmountTickets));
                 if (value <= 0)
                 {
                     amountTickets = 0;
@@ -53,14 +54,10 @@ namespace m120.projekt.kino.ViewModel
                 }
                 else if (SelectedShow == null)
                 {
-                    amountTickets = 0;
-                    TotalPrice = 0;
                     throw new ArgumentException("Choose a show first.");   
                 }
                 else
                 {
-                    amountTickets = value;
-                    RaisePropertyChanged(nameof(AmountTickets));
                     TotalPrice = amountTickets * SelectedShow.Price;
                 }
                 
@@ -72,25 +69,28 @@ namespace m120.projekt.kino.ViewModel
             get { return totalPrice; }
             set
             {
-               
-                    totalPrice = 0;
-               
-                    totalPrice = value;
-
-                
+                totalPrice = 0;
+                totalPrice = value;   
                 RaisePropertyChanged(nameof(TotalPrice));
             }
         }
         public void BookTickets(object o)
         {
-
-            if (AmountTickets <= 0 || SelectedShow == null)
+            if (SelectedShow == null)
             {
-                MessageBox.Show("Book at least one ticket and choose a show.");
+                MessageBox.Show("Choose a show.");
             }
-           
+            else if (AmountTickets <= 0)
+            {
+                MessageBox.Show("Book at least one ticket.");
+            }
+            
             else
             {
+                if (TotalPrice == 0)
+                {
+                    TotalPrice = AmountTickets * SelectedShow.Price;
+                }
                 SelectedShow.AmountFreeSeats -= AmountTickets;
                 if (SelectedShow.AmountFreeSeats < 0)
                 {
@@ -113,13 +113,8 @@ namespace m120.projekt.kino.ViewModel
                         .SingleOrDefault(x => x.IsActive);
                     window.Close();
                 }
-               
-
-
             }
-           
-
-        } 
+        }
         public void CreateReceipt(string time, int tickets)
         {
             string textFileName = "m120.receipt.cinema.txt";
@@ -137,7 +132,5 @@ namespace m120.projekt.kino.ViewModel
                         .SingleOrDefault(x => x.IsActive);
             window.Close();
         }
-
-
     }
 }

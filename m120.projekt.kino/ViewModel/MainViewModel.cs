@@ -21,16 +21,21 @@ namespace m120.projekt.kino.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
         private Cinema cinema;
-        public string Name { get { return cinema.Name; } } 
-        public int AmountOfSeats { get; set; }
+        public string Name { get { return cinema.Name; } }
         public ObservableCollection<Film> Filmlist { get { return cinema.Filmlist; } }
 
         private ObservableCollection<Film> filteredFilmlist;
-        public ObservableCollection<Film> FilteredFilmlist { get { return filteredFilmlist; } set {
+        public ObservableCollection<Film> FilteredFilmlist
+        {
+            get { return filteredFilmlist; }
+            set
+            {
                 filteredFilmlist = value;
                 RaisePropertyChanged(nameof(FilteredFilmlist));
-            } }
+            }
+        }
         public Film SelectedFilm { get; set; }
         public string Searchquery { get; set; }
 
@@ -41,20 +46,21 @@ namespace m120.projekt.kino.ViewModel
 
         public MainViewModel()
         {
-            Cinema cinemaInstance = Cinema.getInstance();
+            Cinema cinemaInstance = Cinema.GetInstance();
             cinema = cinemaInstance;
 
             SeeDetailsCommand = new RelayCommand(SeeFilmDetails);
             SearchCommand = new RelayCommand(FindFilmByName);
             SeeAllFilmsCommand = new RelayCommand(SeeAllFilms);
+
             FilteredFilmlist = Filmlist;
-
-
         }
 
 
-
-
+        /// <summary>
+        /// open the other window "PurchaseWindow" to see Details about the film and book tickets
+        /// </summary>
+        /// <param name="o"></param>
         public void SeeFilmDetails(object o)
         {
             if (SelectedFilm != null)
@@ -72,19 +78,12 @@ namespace m120.projekt.kino.ViewModel
             {
                 MessageBox.Show("Please select a movie.");
             }
-            
+
         }
 
         public void FindFilmByName(object o)
         {
-            IEnumerable<Film> FilteredFilm = Filmlist
-                .Where(r => Searchquery == null || r.Title.Contains(Searchquery))
-                .ToList();
-            FilteredFilmlist = new ObservableCollection<Film>();
-            foreach (Film film in FilteredFilm)
-            {
-                FilteredFilmlist.Add(film);
-            }
+            FilteredFilmlist = cinema.FindFilmByName(Searchquery, FilteredFilmlist);
         }
 
         public void SeeAllFilms(object o)

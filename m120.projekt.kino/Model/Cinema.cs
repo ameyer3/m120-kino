@@ -15,7 +15,7 @@ namespace m120.projekt.kino.Model
         static private Cinema instance;
 
 
-        static public Cinema getInstance()
+        static public Cinema GetInstance()
         {
             if (instance == null)
             {
@@ -26,10 +26,17 @@ namespace m120.projekt.kino.Model
             instance.Filmlist = CreateFilmlist();
             return instance;
         }
-        public Film FindFilmByName()
+        public ObservableCollection<Film> FindFilmByName(string searchquery, ObservableCollection<Film> filteredFilmlist)
         {
-            Film film = new Film();
-            return film;
+            IEnumerable<Film> FilteredFilm = Filmlist
+                .Where(r => searchquery == null || r.Title.Contains(searchquery))
+                .ToList();
+            filteredFilmlist = new ObservableCollection<Film>();
+            foreach (Film film in FilteredFilm)
+            {
+                filteredFilmlist.Add(film);
+            }
+            return filteredFilmlist;
         }
         
         
